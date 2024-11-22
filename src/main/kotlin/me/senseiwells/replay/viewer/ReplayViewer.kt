@@ -13,7 +13,9 @@ import com.replaymod.replaystudio.replay.ZipReplayFile
 import com.replaymod.replaystudio.studio.ReplayStudio
 import it.unimi.dsi.fastutil.ints.IntArrayList
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet
+import it.unimi.dsi.fastutil.ints.IntSets
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
+import it.unimi.dsi.fastutil.longs.LongSets
 import kotlinx.coroutines.*
 import me.senseiwells.replay.ServerReplay
 import me.senseiwells.replay.ducks.PackTracker
@@ -44,6 +46,7 @@ import net.minecraft.server.network.ServerGamePacketListenerImpl
 import net.minecraft.world.BossEvent.BossBarColor
 import net.minecraft.world.BossEvent.BossBarOverlay
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.PositionMoveRotation
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.GameType
 import net.minecraft.world.phys.Vec3
@@ -76,8 +79,9 @@ class ReplayViewer internal constructor(
 
     private var tickSpeed = 20.0F
     private var tickFrozen = false
-    private val chunks = Collections.synchronizedCollection(LongOpenHashSet())
-    private val entities = Collections.synchronizedCollection(IntOpenHashSet())
+
+    private val chunks = LongSets.synchronize(LongOpenHashSet())
+    private val entities = IntSets.synchronize(IntOpenHashSet())
     private val players = Collections.synchronizedList(ArrayList<UUID>())
     private val objectives = Collections.synchronizedCollection(ArrayList<String>())
 
@@ -91,6 +95,8 @@ class ReplayViewer internal constructor(
     private var progress = Duration.ZERO
 
     private var target = Duration.ZERO
+
+    private var position = Vec3.ZERO
 
     val server: MinecraftServer
         get() = this.player.server
@@ -237,6 +243,12 @@ class ReplayViewer internal constructor(
 
     fun getResourcePack(hash: String): InputStream? {
         return this.replay.getResourcePack(hash).orNull()
+    }
+
+    fun resetCamera() {
+        this.send(ClientboundPlayerPositionPacket(
+            0, PositionMoveRotation(this.position, Vec3.ZERO, 0.0F, 0.0F), setOf()
+        ))
     }
 
     private fun readMarkers(): Multimap<String?, Marker> {
@@ -462,6 +474,7 @@ class ReplayViewer internal constructor(
         return when (packet) {
             is ClientboundGameEventPacket -> packet.event != CHANGE_GAME_MODE
             is ClientboundPlayerPositionPacket -> {
+                this.position = packet.change.position
                 // We want the client to teleport to the first initial position
                 // subsequent positions will teleport the viewer which we don't want
                 val teleported = this.teleported
@@ -477,7 +490,6 @@ class ReplayViewer internal constructor(
         when (packet) {
             is ClientboundLevelChunkWithLightPacket -> this.chunks.add(ChunkPos.asLong(packet.x, packet.z))
             is ClientboundForgetLevelChunkPacket -> this.chunks.remove(packet.pos.toLong())
-            is ClientboundAddEntityPacket -> this.entities.add(packet.id)
             is ClientboundRemoveEntitiesPacket -> this.entities.removeAll(packet.entityIds)
             is ClientboundSetObjectivePacket -> {
                 if (packet.method == ClientboundSetObjectivePacket.METHOD_REMOVE) {
