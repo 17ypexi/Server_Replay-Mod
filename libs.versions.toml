@@ -18,10 +18,10 @@ syncmatica    = "1.21.3-sakura.10"
 replay-studio = "4e670490d1"
 
 # Plugins
-fabric-loom   = "1.7-SNAPSHOT"
-mod-publish   = "0.7.0"
+fabric-loom   = "1.9-SNAPSHOT"
+mod-publish   = "0.8.1"
 shadow        = "8.1.1"
-explosion     = "0.2.0"
+explosion     = "0.3.1"
 
 [libraries]
 minecraft        = { module = "com.mojang:minecraft"               , version.ref = "minecraft" }
