@@ -1,25 +1,27 @@
 [versions]
-fabric-loom          = "1.7-SNAPSHOT"
-mod-publish          = "0.7.0"
-shadow               = "8.1.1"
-explosion            = "0.2.0"
-minecraft            = "1.21.3"
-fabric-loader        = "0.16.9"
-parchment            = "1.21:2024.07.28"
-fabric-api           = "0.107.0+1.21.3"
-fabric-kotlin        = "1.11.0+kotlin.2.0.0"
-permissions          = "0.3.3"
-inject               = "2.2.2"
+minecraft     = "1.21.3"
+fabric-loader = "0.16.9"
+parchment     = "1.21:2024.07.28"
+fabric-api    = "0.107.0+1.21.3"
+fabric-kotlin = "1.11.0+kotlin.2.0.0"
+permissions   = "0.3.3"
+inject        = "2.2.2"
 
 # Compatability depdendencies
-carpet               = "1.4.158"
-voicechat            = "fabric-1.21.3-2.5.25"
-voicechat-api        = "2.5.0"
-vmp                  = "0.2.0+beta.7.180+1.21.3"
-c2me                 = "0.3.0+beta.1.0+1.21.3"
-servux               = "1.21.3-0.4.0-sakura.2"
-syncmatica           = "1.21.3-sakura.10"
-replay-studio        = "4e670490d1"
+carpet        = "1.4.158"
+voicechat     = "fabric-1.21.3-2.5.25"
+voicechat-api = "2.5.0"
+vmp           = "0.2.0+beta.7.180+1.21.3"
+c2me          = "0.3.0+beta.1.0+1.21.3"
+servux        = "1.21.3-0.4.0-sakura.2"
+syncmatica    = "1.21.3-sakura.10"
+replay-studio = "4e670490d1"
+
+# Plugins
+fabric-loom   = "1.7-SNAPSHOT"
+mod-publish   = "0.7.0"
+shadow        = "8.1.1"
+explosion     = "0.2.0"
 
 [libraries]
 minecraft        = { module = "com.mojang:minecraft"               , version.ref = "minecraft" }
@@ -33,13 +35,13 @@ inject-http      = { module = "net.mcbrawls.inject:http"           , version.ref
 inject-fabric    = { module = "net.mcbrawls.inject:fabric"         , version.ref = "inject" }
 
 # Compatability depdendencies
-carpet           = { module = "com.github.gnembon:fabric-carpet"                  , version.ref = "carpet" }
-voicechat        = { module = "maven.modrinth:simple-voice-chat"                  , version.ref = "voicechat" }
-voicechat-api    = { module = "de.maxhenkel.voicechat:voicechat-api"              , version.ref = "voicechat-api" }
-vmp              = { module = "maven.modrinth:vmp-fabric"                         , version.ref = "vmp" }
-c2me             = { module = "maven.modrinth:c2me-fabric"                        , version.ref = "c2me" }
-servux           = { module = "com.github.sakura-ryoko:servux"                    , version.ref = "servux" }
-syncmatica       = { module = "com.github.sakura-ryoko:syncmatica"                , version.ref = "syncmatica" }
+carpet           = { module = "com.github.gnembon:fabric-carpet"    , version.ref = "carpet" }
+voicechat        = { module = "maven.modrinth:simple-voice-chat"    , version.ref = "voicechat" }
+voicechat-api    = { module = "de.maxhenkel.voicechat:voicechat-api", version.ref = "voicechat-api" }
+vmp              = { module = "maven.modrinth:vmp-fabric"           , version.ref = "vmp" }
+c2me             = { module = "maven.modrinth:c2me-fabric"          , version.ref = "c2me" }
+servux           = { module = "com.github.sakura-ryoko:servux"      , version.ref = "servux" }
+syncmatica       = { module = "com.github.sakura-ryoko:syncmatica"  , version.ref = "syncmatica" }
 
 [plugins]
 fabric-loom          = { id = "fabric-loom", version.ref = "fabric-loom" }
