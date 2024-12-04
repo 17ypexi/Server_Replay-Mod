@@ -9,6 +9,7 @@ import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket.Act
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.server.network.CommonListenerCookie
 import net.minecraft.server.network.ServerGamePacketListenerImpl
+import net.minecraft.world.entity.player.PlayerModelPart
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.scores.DisplaySlot
 import net.minecraft.world.scores.Objective
@@ -125,6 +126,7 @@ class RejoinedReplayPlayer private constructor(
                         0,
                         unique.gameMode.gameModeForPlayer,
                         null,
+                        unique.isModelPartShown(PlayerModelPart.HAT),
                         0,
                         null
                     ))

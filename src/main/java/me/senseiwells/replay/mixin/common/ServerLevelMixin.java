@@ -98,11 +98,13 @@ public abstract class ServerLevelMixin extends Level {
 	}
 
 	@Inject(
-		method = "sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I",
+		method = "sendParticles(Lnet/minecraft/core/particles/ParticleOptions;ZZDDDIDDDD)I",
 		at = @At("TAIL")
 	)
 	private <T extends ParticleOptions> void onSendParticles(
 		T type,
+		boolean overrideLimiter,
+		boolean alwaysShow,
 		double posX,
 		double posY,
 		double posZ,

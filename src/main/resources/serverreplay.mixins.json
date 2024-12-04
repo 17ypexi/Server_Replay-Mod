@@ -23,6 +23,7 @@
     "compat.carpet.NetHandlerPlayServerFakeMixin",
     "compat.servux.ServuxPacketMixin",
     "compat.syncmatica.SyncmaticaPacketPayloadMixin",
+    "studio.PacketTypeRegistryMixin",
     "compat.vmp.NearbyEntityTrackingMixin",
     "network.IdDispatchCodecAccessor",
     "player.ServerCommonPacketListenerImplMixin",
