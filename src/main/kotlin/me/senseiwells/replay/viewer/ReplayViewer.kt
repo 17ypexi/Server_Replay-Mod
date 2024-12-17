@@ -23,6 +23,7 @@ import me.senseiwells.replay.http.DownloadPacksHttpInjector
 import me.senseiwells.replay.mixin.viewer.EntityInvoker
 import me.senseiwells.replay.rejoin.RejoinedReplayPlayer
 import me.senseiwells.replay.util.DateTimeUtils.formatHHMMSS
+import me.senseiwells.replay.util.ReplayFileUtils
 import me.senseiwells.replay.viewer.ReplayViewerUtils.getViewingReplay
 import me.senseiwells.replay.viewer.ReplayViewerUtils.sendReplayPacket
 import me.senseiwells.replay.viewer.ReplayViewerUtils.startViewingReplay
@@ -150,7 +151,16 @@ class ReplayViewer internal constructor(
             // Un-lazy the markers
             markers
 
-            streamReplay { this.isActive }
+            try {
+                streamReplay { this.isActive }
+            } catch (e: Exception) {
+                ServerReplay.logger.error("Exception while viewing replay", e)
+                stop()
+                player.sendSystemMessage(
+                    Component.literal("Exception while viewing replay, see logs for more info")
+                        .withStyle(ChatFormatting.RED)
+                )
+            }
         }
     }
 
@@ -160,15 +170,9 @@ class ReplayViewer internal constructor(
 
         try {
             this.replay.close()
+            ReplayFileUtils.deleteCaches(this.location)
         } catch (e: IOException) {
             ServerReplay.logger.error("Failed to close replay file being viewed at ${this.location}")
-        }
-        try {
-            val caches = this.location.parent.resolve(this.location.name + ".cache")
-            @OptIn(ExperimentalPathApi::class)
-            caches.deleteRecursively()
-        } catch (e: IOException) {
-            ServerReplay.logger.error("Failed to delete caches", e)
         }
     }
 
@@ -606,7 +610,10 @@ class ReplayViewer internal constructor(
             val request = packet.url.removePrefix("replay://").toIntOrNull()
                 ?: throw IllegalStateException("Malformed replay packet url")
             val hash = this.replay.resourcePackIndex[request]
-                ?: throw IllegalStateException("Unknown replay resource pack index")
+            if (hash == null) {
+                ServerReplay.logger.error("Unknown replay resource pack index, $request for replay ${this.location}")
+                return packet
+            }
             val url = DownloadPacksHttpInjector.createUrl(this, hash)
             return ClientboundResourcePackPushPacket(packet.id, url, "", packet.required, packet.prompt)
         }

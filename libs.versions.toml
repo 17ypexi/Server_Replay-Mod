@@ -15,7 +15,7 @@ vmp           = "0.2.0+beta.7.184+1.21.4-pre2"
 c2me          = "0.3.1+alpha.0.41+1.21.4-rc2"
 servux        = "1.21.3-0.4.0-sakura.2"
 syncmatica    = "1.21.3-sakura.10"
-replay-studio = "4e670490d1"
+replay-studio = "aa5ab3a302"
 
 # Plugins
 fabric-loom   = "1.9-SNAPSHOT"
