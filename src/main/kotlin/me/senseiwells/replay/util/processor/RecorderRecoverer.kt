@@ -16,7 +16,6 @@ import me.senseiwells.replay.config.serialization.PathSerializer
 import me.senseiwells.replay.recorder.ReplayRecorder
 import me.senseiwells.replay.util.ReplayFileUtils
 import net.minecraft.server.MinecraftServer
-import net.minecraft.util.Mth
 import org.jetbrains.annotations.ApiStatus.Internal
 import java.io.EOFException
 import java.io.IOException
