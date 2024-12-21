@@ -48,6 +48,7 @@ import net.minecraft.world.BossEvent.BossBarColor
 import net.minecraft.world.BossEvent.BossBarOverlay
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.PositionMoveRotation
+import net.minecraft.world.entity.Relative
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.GameType
 import net.minecraft.world.phys.Vec3
@@ -475,7 +476,9 @@ class ReplayViewer internal constructor(
         return when (packet) {
             is ClientboundGameEventPacket -> packet.event != CHANGE_GAME_MODE
             is ClientboundPlayerPositionPacket -> {
-                this.position = packet.change.position
+                if (!packet.relatives.containsAll(setOf(Relative.X, Relative.Y, Relative.Z))) {
+                    this.position = packet.change.position
+                }
                 // We want the client to teleport to the first initial position
                 // subsequent positions will teleport the viewer which we don't want
                 val teleported = this.teleported
@@ -491,6 +494,7 @@ class ReplayViewer internal constructor(
         when (packet) {
             is ClientboundLevelChunkWithLightPacket -> this.chunks.add(ChunkPos.asLong(packet.x, packet.z))
             is ClientboundForgetLevelChunkPacket -> this.chunks.remove(packet.pos.toLong())
+            is ClientboundAddEntityPacket -> this.entities.add(packet.id)
             is ClientboundRemoveEntitiesPacket -> this.entities.removeAll(packet.entityIds)
             is ClientboundSetObjectivePacket -> {
                 if (packet.method == ClientboundSetObjectivePacket.METHOD_REMOVE) {
