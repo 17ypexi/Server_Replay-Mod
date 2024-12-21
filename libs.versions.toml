@@ -15,12 +15,12 @@ vmp           = "0.2.0+beta.7.180+1.21.3"
 c2me          = "0.3.0+beta.1.0+1.21.3"
 servux        = "1.21.3-0.4.0-sakura.2"
 syncmatica    = "1.21.3-sakura.10"
-replay-studio = "4e670490d1"
+replay-studio = "aa5ab3a302"
 
 # Plugins
 fabric-loom   = "1.9-SNAPSHOT"
 mod-publish   = "0.8.1"
-shadow        = "8.1.1"
+shadow        = "8.3.5"
 explosion     = "0.3.1"
 
 [libraries]
@@ -44,7 +44,7 @@ servux           = { module = "com.github.sakura-ryoko:servux"      , version.re
 syncmatica       = { module = "com.github.sakura-ryoko:syncmatica"  , version.ref = "syncmatica" }
 
 [plugins]
-fabric-loom          = { id = "fabric-loom", version.ref = "fabric-loom" }
-mod-publish          = { id = "me.modmuss50.mod-publish-plugin", version.ref = "mod-publish" }
-shadow               = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
-explosion            = { id = "lol.bai.explosion", version.ref = "explosion"}
+fabric-loom = { id = "fabric-loom"                    , version.ref = "fabric-loom" }
+mod-publish = { id = "me.modmuss50.mod-publish-plugin", version.ref = "mod-publish" }
+shadow      = { id = "com.gradleup.shadow"            , version.ref = "shadow" }
+explosion   = { id = "lol.bai.explosion"              , version.ref = "explosion"}

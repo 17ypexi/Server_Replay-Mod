@@ -23,11 +23,12 @@ repositories {
     maven("https://api.modrinth.com/maven")
     maven("https://maven.maxhenkel.de/repository/public")
     maven("https://maven.andante.dev/releases/")
+    maven("https://maven4.bai.lol")
     mavenCentral()
 }
 
 
-val modVersion = "1.2.4"
+val modVersion = "1.2.7"
 val releaseVersion = "${modVersion}+mc${libs.versions.minecraft.get()}"
 version = releaseVersion
 group = "me.senseiwells"
@@ -54,9 +55,9 @@ dependencies {
     modCompileOnly(libs.servux)
     modCompileOnly(libs.syncmatica)
     modCompileOnly(libs.voicechat)
-    implementation(libs.voicechat.api)
+    compileOnly(libs.voicechat.api)
 
-    shade(modImplementation(libs.replay.studio.get())!!)
+    shade(implementation(libs.replay.studio.get())!!)
     includeModImplementation(libs.permissions) {
         exclude(libs.fabric.api.get().group)
     }
