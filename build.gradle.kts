@@ -23,12 +23,11 @@ repositories {
     maven("https://api.modrinth.com/maven")
     maven("https://maven.maxhenkel.de/repository/public")
     maven("https://maven.andante.dev/releases/")
-    maven("https://maven4.bai.lol")
     mavenCentral()
 }
 
 
-val modVersion = "1.2.5"
+val modVersion = "1.2.4"
 val releaseVersion = "${modVersion}+mc${libs.versions.minecraft.get()}"
 version = releaseVersion
 group = "me.senseiwells"
@@ -119,7 +118,7 @@ tasks {
         file = remapJar.get().archiveFile
         changelog.set(
             """
-            - Updated to 1.21.4
+            - Added `"ignore_action_bar_packets"` option
             """.trimIndent()
         )
         type = STABLE

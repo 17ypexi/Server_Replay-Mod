@@ -551,7 +551,6 @@ class ReplayViewer internal constructor(
                         entry.latency,
                         entry.gameMode,
                         entry.displayName,
-                        entry.showHat,
                         entry.listOrder,
                         null
                     ))
@@ -568,7 +567,6 @@ class ReplayViewer internal constructor(
                     previous.latency,
                     previous.gameMode,
                     previous.displayName,
-                    previous.showHat,
                     previous.listOrder,
                     null
                 )
