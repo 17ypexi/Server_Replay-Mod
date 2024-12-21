@@ -28,7 +28,7 @@ repositories {
 }
 
 
-val modVersion = "1.2.7"
+val modVersion = "1.2.8"
 val releaseVersion = "${modVersion}+mc${libs.versions.minecraft.get()}"
 version = releaseVersion
 group = "me.senseiwells"
@@ -119,17 +119,7 @@ tasks {
         file = remapJar.get().archiveFile
         changelog.set(
             """
-            - Updated ReplayStudio, with proper 1.21.4 protocol support
-            
-            ## IMPORTANT NOTE
-            Anything that was recorded with 1.21.4 ServerReplay has *invalid metadata*,
-            which was an oversight on my behalf. All 1.21.4 replays recorded are thought
-            to use the 1.21.2 protocol, meaning they won't load properly; You can fix this 
-            manually by unzipping any .mcpr files (you may need to rename them to .zip) and 
-            modifying the `"metaData.json"` file by setting `"protocol"` to `769`.
-            
-            Alternatively you can boot the new version of this mod and it will try
-            to fix any invalid replays automatically. 
+            - Fix a compatability issue with polymer
             """.trimIndent()
         )
         type = STABLE
