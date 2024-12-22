@@ -15,6 +15,7 @@ vmp           = "0.2.0+beta.7.184+1.21.4-pre2"
 c2me          = "0.3.1+alpha.0.41+1.21.4-rc2"
 servux        = "1.21.3-0.4.0-sakura.2"
 syncmatica    = "1.21.3-sakura.10"
+polymer       = "0.11.2+1.21.4"
 replay-studio = "aa5ab3a302"
 
 # Plugins
@@ -42,6 +43,7 @@ vmp           = { module = "maven.modrinth:vmp-fabric"           , version.ref =
 c2me          = { module = "maven.modrinth:c2me-fabric"          , version.ref = "c2me" }
 servux        = { module = "com.github.sakura-ryoko:servux"      , version.ref = "servux" }
 syncmatica    = { module = "com.github.sakura-ryoko:syncmatica"  , version.ref = "syncmatica" }
+polymer-core  = { module = "eu.pb4:polymer-core"                 , version.ref = "polymer" }
 
 [plugins]
 fabric-loom = { id = "fabric-loom"                    , version.ref = "fabric-loom" }
